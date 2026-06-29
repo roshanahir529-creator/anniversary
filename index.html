@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshan ❤️ Janvi - Anniversary</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: radial-gradient(circle, #1a0000 0%, #000000 100%);
+            overflow-x: hidden;
+            font-family: 'Georgia', serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .gold-text {
+            color: #D4AF37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        /* Particle Animations */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        .petal, .heart, .particle {
+            position: fixed;
+            top: -10%;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col items-center justify-start p-4">
+
+    <!-- PASSWORD SCREEN -->
+    <div id="lock-screen" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center p-6">
+        <div class="glass p-8 rounded-2xl max-w-sm w-full text-center border-red-800">
+            <i class="fa-solid fa-heart-lock text-red-600 text-5xl mb-4 animate-pulse"></i>
+            <h2 class="text-2xl font-bold mb-2 gold-text">Enter Secret Code</h2>
+            <p class="text-xs text-gray-400 mb-6">Hint: Aapki shuruat ki date (DD/MM/YYYY)</p>
+            <input type="password" id="pass-input" placeholder="Enter Password" class="w-full p-3 rounded-lg bg-stone-900 border border-amber-500 text-center text-white font-bold mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <button onclick="checkPassword()" class="w-full bg-gradient-to-r from-red-700 to-amber-600 hover:from-red-600 hover:to-amber-500 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Unlock Love 💖</button>
+            <p id="error-msg" class="text-red-500 text-sm mt-3 hidden">Galat password hai bacha! 🥺</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT (HIDDEN INITIALY) -->
+    <div id="main-content" class="hidden w-full max-w-lg mx-auto flex flex-col items-center pt-8 pb-24 space-y-8 z-10">
+        
+        <!-- Music Button -->
+        <button onclick="toggleMusic()" class="fixed top-4 right-4 z-40 bg-amber-500 text-black w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white animate-bounce">
+            <i id="music-icon" class="fa-solid fa-music text-xl"></i>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Header Block -->
+        <div class="glass w-full p-6 rounded-2xl text-center border-red-900/50">
+            <h1 class="text-4xl font-extrabold gold-text tracking-wide mb-1">Roshan ❤️ Janvi</h1>
+            <p class="text-red-500 font-semibold tracking-widest text-sm uppercase">Happy 3rd Anniversary</p>
+            <div class="w-24 h-[1px] bg-amber-500 mx-auto my-4"></div>
+            <p class="text-gray-300 text-sm italic">"3 Years of love, laughter, and beautiful memories together."</p>
+        </div>
+
+        <!-- Live Countdown -->
+        <div class="glass w-full p-6 rounded-2xl text-center">
+            <h3 class="text-sm uppercase tracking-wider text-amber-500 mb-4 font-bold">The Celebration Begins In</h3>
+            <div class="grid grid-cols-4 gap-2 text-center">
+                <div class="bg-black/40 p-2 rounded-lg border border-red-900"><span id="days" class="text-2xl font-bold gold-text">00</span><p class="text-[10px] text-gray-400">Days</p></div>
+                <div class="bg-black/40 p-2 rounded-lg border border-red-900"><span id="hours" class="text-2xl font-bold gold-text">00</span><p class="text-[10px] text-gray-400">Hours</p></div>
+                <div class="bg-black/40 p-2 rounded-lg border border-red-900"><span id="minutes" class="text-2xl font-bold gold-text">00</span><p class="text-[10px] text-gray-400">Mins</p></div>
+                <div class="bg-black/40 p-2 rounded-lg border border-red-900"><span id="seconds" class="text-2xl font-bold gold-text">00</span><p class="text-[10px] text-gray-400">Secs</p></div>
+            </div>
+        </div>
+
+        <!-- Photo Gallery (6 Photos placeholder) -->
+        <div class="w-full">
+            <h3 class="text-center gold-text font-bold mb-4 text-lg">Our Beautiful Journey 📸</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img1.jpg" alt="Photo 1" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img2.jpg" alt="Photo 2" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img3.jpg" alt="Photo 3" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img4.jpg" alt="Photo 4" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img5.jpg" alt="Photo 5" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+                <div class="glass p-1 rounded-xl overflow-hidden aspect-square"><img src="img6.jpg" alt="Photo 6" class="w-full h-full object-cover rounded-lg bg-stone-900"></div>
+            </div>
+        </div>
+
+        <!-- Love Letter -->
+        <div class="glass w-full p-6 rounded-2xl relative border-red-900/50">
+            <div class="absolute -top-3 left-6 bg-red-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">My Love Letter 💌</div>
+            <p class="text-gray-200 leading-relaxed text-sm pt-2 text-justify">
+                Dearest Janvi,<br><br>
+                Happy Anniversary! 30 June 2023 se lekar aaj tak, tumne meri zindagi ko behad khoobsurat bana diya hai. In 3 saalon mein humne jo haste-muskurate pal bitaye hain, wo mere liye sabse qeemti hain. Tum mera sukoon ho aur mera aaj aur kal bhi tum hi ho. Thank you hamesha mera sath dene ke liye. I love you so much! ❤️
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Password Protection
+        function checkPassword() {
+            const input = document.getElementById('pass-input').value;
+            if(input === '25/06/2023') {
+                document.getElementById('lock-screen').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                // Start background effects
+                startEffects();
+            } else {
+                document.getElementById('error-msg').classList.remove('hidden');
+            }
+        }
+
+        // Music Control
+        const audio = document.getElementById('bg-music');
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                document.getElementById('music-icon').className = "fa-solid fa-pause text-xl";
+            } else {
+                audio.pause();
+                document.getElementById('music-icon').className = "fa-solid fa-music text-xl";
+            }
+        }
+
+        // Countdown Timer (Target: 30 June 2026)
+        const countdownDate = new Date("June 30, 2026 00:00:00").getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+            }
+        }, 1000);
+
+        // Falling Elements Creation
+        function createParticle(type, content, styleClass) {
+            const el = document.createElement('div');
+            el.className = styleClass;
+            el.innerHTML = content;
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            el.style.fontSize = Math.random() * 15 + 10 + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 7000);
+        }
+
+        function startEffects() {
+            // Rose Petals
+            setInterval(() => createParticle('petal', '🌹', 'petal'), 600);
+            // Floating Hearts
+            setInterval(() => createParticle('heart', '💖', 'heart'), 800);
+            // Golden Particles
+            setInterval(() => createParticle('particle', '✨', 'particle'), 500);
+        }
+    </script>
+</body>
+  </html>
+  
